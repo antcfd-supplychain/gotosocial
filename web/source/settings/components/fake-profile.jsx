@@ -21,7 +21,7 @@
 
 const React = require("react");
 
-module.exports = function FakeProfile({ avatar, header, display_name, username, role }) {
+module.exports = function FakeProfile({ avatar, header, display_name, username, acct, role }) {
 	return ( // Keep in sync with web/template/profile.tmpl
 		<div className="profile">
 			<div className="headerimage">
@@ -32,7 +32,7 @@ module.exports = function FakeProfile({ avatar, header, display_name, username, 
 				<span className="avatar"><img className="avatarpreview" src={avatar} alt={avatar ? `avatar image for ${username}` : "None set"} /></span>
 				<div className="displayname">{display_name.trim().length > 0 ? display_name : username}</div>
 				<div className="usernamecontainer">
-					<div className="username"><span>@{username}</span></div>
+					<div className="username"><span>@{acct ?? username}</span></div>
 					{(role && role.name != "user") &&
 						<div className={`role ${role.name}`}>{role.name}</div>
 					}
