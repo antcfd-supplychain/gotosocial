@@ -18,7 +18,7 @@ require (
 	codeberg.org/gruf/go-store/v2 v2.2.2
 	github.com/DmitriyVTitov/size v1.5.0
 	github.com/KimMachineGun/automemlimit v0.3.0
-	github.com/abema/go-mp4 v0.13.0
+	github.com/abema/go-mp4 v1.0.0
 	github.com/buckket/go-blurhash v1.1.0
 	github.com/coreos/go-oidc/v3 v3.6.0
 	github.com/disintegration/imaging v1.6.2
@@ -64,7 +64,7 @@ require (
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
 	golang.org/x/image v0.12.0
 	golang.org/x/net v0.15.0
-	golang.org/x/oauth2 v0.11.0
+	golang.org/x/oauth2 v0.12.0
 	golang.org/x/text v0.13.0
 	gopkg.in/mcuadros/go-syslog.v2 v2.3.0
 	gopkg.in/yaml.v3 v3.0.1

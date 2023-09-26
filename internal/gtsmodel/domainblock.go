@@ -32,3 +32,47 @@ type DomainBlock struct {
 	Obfuscate          *bool     `bun:",nullzero,notnull,default:false"`                             // whether the domain name should appear obfuscated when displaying it publicly
 	SubscriptionID     string    `bun:"type:CHAR(26),nullzero"`                                      // if this block was created through a subscription, what's the subscription ID?
 }
+
+func (d *DomainBlock) GetID() string {
+	return d.ID
+}
+
+func (d *DomainBlock) GetCreatedAt() time.Time {
+	return d.CreatedAt
+}
+
+func (d *DomainBlock) GetUpdatedAt() time.Time {
+	return d.UpdatedAt
+}
+
+func (d *DomainBlock) GetDomain() string {
+	return d.Domain
+}
+
+func (d *DomainBlock) GetCreatedByAccountID() string {
+	return d.CreatedByAccountID
+}
+
+func (d *DomainBlock) GetCreatedByAccount() *Account {
+	return d.CreatedByAccount
+}
+
+func (d *DomainBlock) GetPrivateComment() string {
+	return d.PrivateComment
+}
+
+func (d *DomainBlock) GetPublicComment() string {
+	return d.PublicComment
+}
+
+func (d *DomainBlock) GetObfuscate() *bool {
+	return d.Obfuscate
+}
+
+func (d *DomainBlock) GetSubscriptionID() string {
+	return d.SubscriptionID
+}
+
+func (d *DomainBlock) GetType() DomainPermissionType {
+	return DomainPermissionBlock
+}

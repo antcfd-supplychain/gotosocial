@@ -18,13 +18,8 @@
 package admin
 
 import (
-	"fmt"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
-	apiutil "github.com/superseriousbusiness/gotosocial/internal/api/util"
-	"github.com/superseriousbusiness/gotosocial/internal/gtserror"
-	"github.com/superseriousbusiness/gotosocial/internal/oauth"
+	"github.com/superseriousbusiness/gotosocial/internal/gtsmodel"
 )
 
 // DomainBlockGETHandler swagger:operation GET /api/v1/admin/domain_blocks/{id} domainBlockGet
@@ -54,7 +49,7 @@ import (
 //		'200':
 //			description: The requested domain block.
 //			schema:
-//				"$ref": "#/definitions/domainBlock"
+//				"$ref": "#/definitions/domainPermission"
 //		'400':
 //			description: bad request
 //		'401':
@@ -68,40 +63,5 @@ import (
 //		'500':
 //			description: internal server error
 func (m *Module) DomainBlockGETHandler(c *gin.Context) {
-	authed, err := oauth.Authed(c, true, true, true, true)
-	if err != nil {
-		apiutil.ErrorHandler(c, gtserror.NewErrorUnauthorized(err, err.Error()), m.processor.InstanceGetV1)
-		return
-	}
-
-	if !*authed.User.Admin {
-		err := fmt.Errorf("user %s not an admin", authed.User.ID)
-		apiutil.ErrorHandler(c, gtserror.NewErrorForbidden(err, err.Error()), m.processor.InstanceGetV1)
-		return
-	}
-
-	if _, err := apiutil.NegotiateAccept(c, apiutil.JSONAcceptHeaders...); err != nil {
-		apiutil.ErrorHandler(c, gtserror.NewErrorNotAcceptable(err, err.Error()), m.processor.InstanceGetV1)
-		return
-	}
-
-	domainBlockID, errWithCode := apiutil.ParseID(c.Param(apiutil.IDKey))
-	if errWithCode != nil {
-		apiutil.ErrorHandler(c, errWithCode, m.processor.InstanceGetV1)
-		return
-	}
-
-	export, errWithCode := apiutil.ParseDomainBlockExport(c.Query(apiutil.DomainBlockExportKey), false)
-	if errWithCode != nil {
-		apiutil.ErrorHandler(c, errWithCode, m.processor.InstanceGetV1)
-		return
-	}
-
-	domainBlock, errWithCode := m.processor.Admin().DomainBlockGet(c.Request.Context(), domainBlockID, export)
-	if errWithCode != nil {
-		apiutil.ErrorHandler(c, errWithCode, m.processor.InstanceGetV1)
-		return
-	}
-
-	c.JSON(http.StatusOK, domainBlock)
+	m.getDomainPermission(c, gtsmodel.DomainPermissionBlock)
 }

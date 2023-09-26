@@ -15,14 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package testrig
+package config
 
-import (
-	"github.com/superseriousbusiness/gotosocial/internal/db"
-	"github.com/superseriousbusiness/gotosocial/internal/typeutils"
+// Instance federation mode determines how this
+// instance federates with others (if at all).
+const (
+	InstanceFederationModeBlocklist = "blocklist"
+	InstanceFederationModeAllowlist = "allowlist"
+	InstanceFederationModeDefault   = InstanceFederationModeBlocklist
 )
-
-// NewTestTypeConverter returned a type converter with the given db and the default test config
-func NewTestTypeConverter(db db.DB) typeutils.TypeConverter {
-	return typeutils.NewConverter(db)
-}
