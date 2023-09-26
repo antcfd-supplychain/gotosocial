@@ -13,3 +13,43 @@ updates:
       prefix: "[chore]"
     labels:
       - "chore"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /vendor/github.com/pelletier/go-toml/v2
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /vendor/github.com/tdewolff/minify/v2
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /vendor/github.com/uptrace/bun
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /vendor/github.com/vmihailenco/msgpack/v5
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /vendor/go.opentelemetry.io/otel
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /web/source
+    schedule:
+      interval: daily
