@@ -19,6 +19,8 @@ jobs:
         id: sbom
         env: 
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Cat the sbom
+        run: cat ${{steps.sbom.outputs.fileName }} 
       - uses: actions/upload-artifact@v3.1.0
         with: 
           path: ${{steps.sbom.outputs.fileName }}
